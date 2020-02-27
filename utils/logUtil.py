@@ -15,9 +15,9 @@ class Logger:
 #2定义参数
     #输出文件名称、Loggername、日志登录
     def __init__(self,log_file,log_name,log_evel):
-        self.log_file = log_file
-        self.log_name = log_name
-        self.log_evel = log_evel
+        self.log_file = log_file  #扩展名固定；配置文件
+        self.log_name = log_name    #参数 不放配置文件
+        self.log_evel = log_evel    #配置文件
         #1设置logger名称
         self.logger = logging.getLogger(self.log_file)
 

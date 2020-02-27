@@ -1,4 +1,8 @@
 ---
 BASE:
+  #log登录
+  log_level:"debug"
+  #扩展名
+  log_extensiong:".log"
   test:
     url: "http://211.103.136.242:8064"
