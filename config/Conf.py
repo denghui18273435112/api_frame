@@ -37,12 +37,11 @@ def get_log_path():
 class ConfigYaml:
 
     def __init__(self):
-        #self.config = YamlReaber(get_config_file()).data()
+        self.config = YamlReaber(get_config_file()).data()
         self.config_all = YamlReaber(get_config_file()).data_all()
 
     def get_conf_url(self):
         return self.config_all["BASE"]["test"]["url"]
-        #return YamlReaber(get_config_file()).data()["BASE"]["test"]["url"]
 
     def get_conf_url_all(self):
         return self.config_all["BASE"]["test"]["url"]
