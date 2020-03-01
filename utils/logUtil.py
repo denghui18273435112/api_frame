@@ -60,7 +60,7 @@ def my_log(log_name=__file__):
 
 
 if __name__ == '__main__':
-    my_log().debug("dad")
+    my_log().debug("12344444444")
 
 
 
