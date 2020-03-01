@@ -2,8 +2,8 @@
 #  YamlUtil.py
 import  os
 import yaml
-class YamlReaber:
 
+class YamlReaber:
     #先初始化
     def __init__(self,yamlf):
         if os.path.exists(yamlf):
@@ -13,7 +13,7 @@ class YamlReaber:
         self._data = None
         self._data_all = None
 
-     #当个文档
+    #  #当个文档
     def data(self):
         if not self._data:
             with open(self.yamlf,"rb") as f:
