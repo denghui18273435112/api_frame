@@ -102,9 +102,10 @@ def order():
 
 if __name__ == '__main__':
 
-    #print(login())
+    print(login())
 
-	print(info())
+	#print(info())
     #print(goods_list())
     #print(cart())
     #print(order())
+

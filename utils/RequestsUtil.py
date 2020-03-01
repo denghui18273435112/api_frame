@@ -1,4 +1,5 @@
 import requests
+from utils.logUtil import my_log
 
 #自定义方法;requests库中的get方法
 def requests_get(url,headers=None,data=None):
@@ -28,10 +29,15 @@ def requests_post(url,headers=None,data=None,json=None):
 
 #重构requests库中的post方法、get方法
 class Request:
+
+	def __init__(self):
+		self.log = my_log("Request")
 	def request_api(self,url,headers=None,data=None,json=None,cookies=None,method="get"):
 		if method=="get":
+			self.log.debug("发送get请求")
 			r = requests.get(url=url,headers=headers,data=data,cookies=cookies)
 		elif method=="post":
+			self.log.debug("发送post请求")
 			r = requests.post(url=url,headers=headers,data=data,json=json,cookies=cookies)
 		code = r.status_code
 		try:
