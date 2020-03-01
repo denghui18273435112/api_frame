@@ -32,7 +32,7 @@ class Logger:   #1 创建类
             fh_stream.setFormatter(formatter)                   #第五步：定义格式
 
            #两种类型第二种：写入文件
-            fh_file = logging.FileHandler(self.log_file)            #第三步：写入文件的handler
+            fh_file = logging.FileHandler(self.log_file,encoding='utf-8')            #第三步：写入文件的handler
             fh_file.setLevel(log_l[self.log_level])                  #第四步：设置日志级别
             #formatter = logging.Formatter("%(asctime)s %(name)s %(levelname)s %(message)s")
             fh_file.setFormatter(formatter)                          #第五步：定义格式
