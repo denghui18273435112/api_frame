@@ -29,5 +29,5 @@ class YamlReaber: #创建一个类
         #第一个调用data，读取yaml文档，如果_data_all不为空不是 ，直接返回之前保存的数据
         if not self._data_all:
             with open(self.yamlfile,"rb") as f:
-                self._data_all = yaml.safe_load_all(f)
+                self._data_all = list(yaml.safe_load_all(f))
         return  self._data_all
