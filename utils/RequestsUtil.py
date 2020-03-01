@@ -31,7 +31,7 @@ def requests_post(url,headers=None,data=None,json=None):
 class Request:
 
 	def __init__(self):
-		self.log = my_log("Request")
+		self.log = my_log("自定义封装")
 	def request_api(self,url,headers=None,data=None,json=None,cookies=None,method="get"):
 		if method=="get":
 			self.log.debug("发送get请求")
