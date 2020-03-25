@@ -8,6 +8,3 @@ LOG:
 
 test_environment1: #测试环境的地址
     url: "http://211.103.136.242:8064"
-
-test_environment2: #测试环境的地址
-    url: "http://211.103.136.242:8064"
