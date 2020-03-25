@@ -5,3 +5,6 @@ test_environment: #测试环境的地址
 LOG:
   log_level: "debug"  #log登录
   log_extensiong: ".log"  #扩展名
+
+test_environment1: #测试环境的地址
+    url: "http://211.103.136.242:8064"
