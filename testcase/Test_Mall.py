@@ -70,7 +70,7 @@ def cart():
 	url = ConfigYaml().get_conf_url()+"/cart/"
 	#url = "http://211.103.136.242:8064/cart/"
 	data = {"sku_id":"3","count":"1","selected":"true"}
-	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1Nzk0MzE4NTcsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.Y2DDZSwgJt6ykmfFhKr71EpL8glDGrx_gtFeSqdGH-o"
+	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1ODUyMDUzMTIsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.jyxFvYviFaa57s9lP_23PPNw9h5iPGnT7a0I9XC_fGY"
 	headers = {"Authorization":"JWT "+token}
 
 	#原始
@@ -78,6 +78,7 @@ def cart():
 	# print(r.json())
 	#第一次封装
 	#return requests_post(url=url,data=data,headers=headers)
+
 	#第一次重构
 	return Request().get(url=url,data=data,headers=headers)
 
@@ -102,10 +103,10 @@ def order():
 
 if __name__ == '__main__':
 
-    print(login())
+    #print(login())
 
 	#print(info())
     #print(goods_list())
-    #print(cart())
+    print(cart())
     #print(order())
 
