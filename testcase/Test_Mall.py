@@ -95,6 +95,6 @@ def order():										#方法存在问题
 if __name__ == '__main__':
 	#print(info())
 	#print(goods_list())
-    print(cart())
-    #print(order())
 
+    #print(order())
+	pprint(cart(), indent=2)
