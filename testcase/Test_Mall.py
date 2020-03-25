@@ -29,11 +29,13 @@ info_2	个人信息	获取个人信息正确
 http://211.103.136.242:8064/user/		GET	json
 """
 def info():
-	#url = "http://211.103.136.242:8064/user/"
 
+	token_new = login()["boby"]["token"]		# 调用登陆成功后返回的token
+	#print(token_new)
+	#url = "http://211.103.136.242:8064/user/"
 	url = ConfigYaml().get_conf_url()+"/user/"
-	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1ODIwNzQwNTUsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.oO3p5apP3SkfynUUEm9PSn3JGXXv9aNdP0ql5nuNY-w"
-	headers = {"Authorization":"JWT "+token}
+	#token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1ODIwNzQwNTUsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.oO3p5apP3SkfynUUEm9PSn3JGXXv9aNdP0ql5nuNY-w"
+	headers = {"Authorization":"JWT "+token_new}
 
 	#原始
 	# r= requests.get(url=url,headers=headers)
@@ -50,7 +52,7 @@ def info():
 GET	json	{""page:"1","page_size":"10","ordering":"create_time"}
 """
 def goods_list():
-	url = ConfigYaml().get_conf_url()+"/categories/115/skus/"
+	url = ConfigYaml().get_conf_url()+"/categories/115/skus/"		#ConfigYaml().get_conf_url() 获取yaml文件中的url
 	#url = "http://211.103.136.242:8064/categories/115/skus/"
 	data = {"page":"1","page_size":"10","ordering":"create_time"}
 
@@ -67,11 +69,12 @@ def goods_list():
 登录	GET	json	{"sku_id":"3","count":"1","selected":"true"}
 """
 def cart():
+	token_new = login()["boby"]["token"]		# 调用登陆成功后返回的token
 	url = ConfigYaml().get_conf_url()+"/cart/"
 	#url = "http://211.103.136.242:8064/cart/"
 	data = {"sku_id":"3","count":"1","selected":"true"}
-	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1ODUyMDUzMTIsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.jyxFvYviFaa57s9lP_23PPNw9h5iPGnT7a0I9XC_fGY"
-	headers = {"Authorization":"JWT "+token}
+	#token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1ODUyMDUzMTIsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.jyxFvYviFaa57s9lP_23PPNw9h5iPGnT7a0I9XC_fGY"
+	headers = {"Authorization":"JWT "+token_new}
 
 	#原始
 	# r= requests.post(url=url,data=data,headers=headers)
@@ -85,28 +88,26 @@ def cart():
 
 """order_1	订单	保存订单	http://211.103.136.242:8064/orders/	登录	GET	json	{"address":"1","pay_method":"1"}
 """
-def order():
+def order():				#方法存在问题
+	token_new = login()["boby"]["token"]		# 调用登陆成功后返回的token
 	url = ConfigYaml().get_conf_url()+"/orders/"
 	#url = "http://211.103.136.242:8064/orders/"
 	data = {"address":"1","pay_method":"1"}
-	token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1Nzk0MzE4NTcsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.Y2DDZSwgJt6ykmfFhKr71EpL8glDGrx_gtFeSqdGH-o"
-	headers = {"Authorization":"JWT "+token}
+	#token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Ijk1MjY3MzYzOEBxcS5jb20iLCJleHAiOjE1Nzk0MzE4NTcsInVzZXJuYW1lIjoicHl0aG9uIiwidXNlcl9pZCI6MX0.Y2DDZSwgJt6ykmfFhKr71EpL8glDGrx_gtFeSqdGH-o"
+	headers = {"Authorization":"JWT "+token_new}
 
 	#原始
 	# r= requests.post(url=url,data=data,headers=headers)
 	# print(r.json())
 	#第一次封装
-	#return requests_post(url=url,data=data,headers=headers)
+	#return requests_get(url=url,data=data,headers=headers)
 	#第一次重构
 	return Request().post(url=url,data=data,headers=headers)
 
 
 if __name__ == '__main__':
-
-    #print(login())
-
 	#print(info())
-    #print(goods_list())
+	#print(goods_list())
     print(cart())
     #print(order())
 
