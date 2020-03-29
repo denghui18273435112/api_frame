@@ -2,7 +2,7 @@ import  requests
 from utils.RequestsUtil import *
 from utils.RequestsUtil import Request
 from config.Conf import ConfigYaml
-
+from utils.AssertUitl import AssertUitl
 """
 login_4	登录  登录成功	http://211.103.136.242:8064/authorizations/
 POST	json			{"username":"python","password":"12345678"}
@@ -55,6 +55,9 @@ def goods_list():
 	#第一次重构
 	return Request().get(url=url,data=data)
 
+	# r = Request().get(url=url,data=data)
+	# return  AssertUitl().assert_code(r["code"],201)
+
 """cart_1	购物车	添加购物车成功	http://211.103.136.242:8064/cart/
 登录	GET	json	{"sku_id":"3","count":"1","selected":"true"}
 """
@@ -90,11 +93,13 @@ def order():										#方法存在问题
 	#return requests_get(url=url,data=data,headers=headers)
 
 	#第一次重构
-	return Request().post(url=url,data=data,headers=headers)
+	#return Request().post(url=url,data=data,headers=headers)
+
+
 
 if __name__ == '__main__':
 	#print(info())
 	#print(goods_list())
 
     #print(order())
-	pprint(cart(), indent=2)
+	pprint(goods_list(), indent=2)
