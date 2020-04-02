@@ -93,8 +93,9 @@ def order():										#方法存在问题
 	return Request().post(url=url,data=data,headers=headers)
 
 if __name__ == '__main__':
+	goods_list()
 	#print(info())
 	#print(goods_list())
 
     #print(order())
-	pprint(cart(),indent=2)
+	#pprint(cart(),indent=2)

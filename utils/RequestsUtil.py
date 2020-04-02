@@ -55,7 +55,7 @@ class Request:
 		return res
 
 	def get(self,url,**kwargs):
-		return self.request_api(url,method="get",**kwargs,*args)		#不定参数: *args和**kwargs 可以接受任意长度和格式的参数
+		return self.request_api(url,method="get",**kwargs)		#不定参数: *args和**kwargs 可以接受任意长度和格式的参数；两个参数不能同时传，一次只能传一个
 
 	def post(self,url,**kwargs):
-		return self.request_api(url,method="post",**kwargs,*args)
+		return self.request_api(url,method="post",**kwargs)
