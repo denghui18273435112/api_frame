@@ -2,11 +2,39 @@ import  requests
 from utils.RequestsUtil import *
 from utils.RequestsUtil import Request
 from config.Conf import ConfigYaml
+from common.Base import init_db
 
 """
 login_4	登录  登录成功	http://211.103.136.242:8064/authorizations/
 POST	json			{"username":"python","password":"12345678"}
 """
+def login1():
+	url = ConfigYaml().get_conf_url()+"/authorizations/"	# 调用封装方法，获取url地址
+	data = {"username":"python","password":"12345678"}
+
+	# r= requests.post(url=url,data=data)		#原始
+	# print(r.json())
+
+	#return requests_post(url=url,data=data)	#第一次封装
+
+	r = Request().post(url=url,data=data)	#第一次重构
+	body = r["body"]
+	print(body)
+
+	conn = init_db("db_1")
+	res_db = conn.fetchone("select id,username from tb_users where username='python' ")
+	print("数据库查询结果",res_db)
+
+	user_id = body["user_id"]
+
+	#assert user_id == res_db["id"]
+	
+	if user_id == res_db["id"]:
+		print("验证成功")
+	else:
+		print("验证失败")
+
+
 def login():
 	url = ConfigYaml().get_conf_url()+"/authorizations/"	# 调用封装方法，获取url地址
 	data = {"username":"python","password":"12345678"}
@@ -98,4 +126,5 @@ if __name__ == '__main__':
 	#print(goods_list())
 
     #print(order())
-	pprint(cart(),indent=2)
+	#pprint(cart(),indent=2)
+	print(login1())

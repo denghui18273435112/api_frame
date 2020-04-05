@@ -33,6 +33,7 @@ class AssertUitl:
         :param expected_body:
         :return:
         """
+
         try:
             assert  body == expected_body
             return  "两个body相同"

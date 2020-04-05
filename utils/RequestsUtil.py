@@ -46,12 +46,12 @@ class Request:
 		code = r.status_code
 		#封装返回参数
 		try:
-			boby = r.json()
+			body = r.json()
 		except Exception as e:
-			boby = r.text
+			body = r.text
 		res =dict()
 		res["code"] = code
-		res["boby"] = boby
+		res["body"] = body
 		return res
 
 	def get(self,url,**kwargs):

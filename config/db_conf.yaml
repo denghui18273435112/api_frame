@@ -1,0 +1,9 @@
+db_1: #测试环境的地址
+    db_host: "211.103.136.242"
+    db_user: "test"
+    db_password: "test123456"
+    db_database:  "meiduo"
+    db_port: "7090"
+    db_charset: "utf8"
+
+
