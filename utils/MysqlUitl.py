@@ -1,11 +1,20 @@
 # coding=utf-8
 
-# 第1步：导包
 import pymysql
 from utils.logUtil import my_log
 
 class Mysql:
     def __init__(self,host,user,password,database,port,charset="utf8"):
+        """
+        :param host:  数据库的地址
+        :param user:  数据库账号
+        :param password: 密码
+        :param database: 方法哪个数据库
+        :param port:  数据库端口  默认3306
+        :param charset:  字符集
+        :param self.cursor 字典类型
+        :param self.conn.cursor(cursor=pymysql.cursors.DictCursor)   #获取执行sql的光标对象  cursor=pymysql.cursors.DictCursor  把输入结果更改为字典格式
+        """
         self.log = my_log()
         self.conn = pymysql.connect(
             host=host,
@@ -15,31 +24,37 @@ class Mysql:
             charset = charset,
             port = port
         )
-        self.cursor = self.conn.cursor(cursor=pymysql.cursors.DictCursor)    #获取执行sql的光标对象  cursor=pymysql.cursors.DictCursor  把输入结果更改为字典格式
+        self.cursor = self.conn.cursor(cursor=pymysql.cursors.DictCursor)
 
     def fetchone(self,sql):
-        '''
+        """
         单个查询
-        :param sql:
-        :return:
-        '''
-        self.cursor.execute(sql)        #执行sql语句
-        return self.cursor.fetchone()   #返回查询出来的数据
+        :param sql: #执行sql语句
+        :return:     #返回一天查询出来的数据
+        execute(sql) 执行sql语句
+        fetchone()   只返回一条记录
+        """
+        self.cursor.execute(sql)
+        return self.cursor.fetchone()
 
     def fetchalll(self,sql):
-        '''
+        """
         多个查询
-        :param sql:
-        :return:
-        '''
-        self.cursor.execute(sql)        #执行sql语句
-        return self.cursor.fetchall()  #返回查询出来的数据
+        :param sql: #执行sql语句
+        :return:#返回查询出来的所以数据
+        execute(sql) 执行sql语句
+        fetchall()     返回查询出来的所有记录
+        """
+        self.cursor.execute(sql)
+        return self.cursor.fetchall()
 
     def exec(self,sql):
-        '''
-        执行
+        """
+        执行SQL语句是否成功；
+        成功返回ture
+        失败返回false
         :return:
-        '''
+        """
         try:
             if self.conn and self.cursor:
                 self.cursor.execute(sql)
@@ -52,10 +67,13 @@ class Mysql:
         return True
 
     def __del__(self):
-        #关闭光标对象
+        """
+        __del__方法会自动关闭
+        #关闭光标对象cursor
+        #关闭连接对象conn
+        """
         if self.cursor is not None:
             self.cursor.close()
-        #关闭连接对象
         if self.conn is not None:
             self.conn.close()
 
@@ -66,44 +84,10 @@ if __name__ == '__main__':
                   "meiduo",
                   7090,
                   charset="utf8")
-    res = mysql.fetchalll("select username,password from tb_users")
+    res = mysql.fetchone("select username,password from tb_users")
     print(res)
 
 
 
-# #  没有封装前的代码
-#
-#
-# #第一个导pymysql
-# import pymysql
-#
-# #  第2步：链接数据库
-# """
-# host 数据库地址；
-# user、password 数据库账号和密码；
-# database 连接的数据库；
-# charset 编码集； port 端口
-# """
-# conn = pymysql.connect(
-#     host="211.103.136.242",
-#     user="test",
-#     password="test123456",
-#     database="meiduo",
-#     charset = "utf8",
-#     port = 7090
-# )
-#
-# # 第3步：获取执行sql的光标对象
-# cuesor = conn.cursor()
-#
-# # 第4步： 执行sql的方法 execute
-# sql = "select username,password from tb_users"
-# cuesor.execute(sql)
-# # fetchone() 单条信息;fetchall()全部信息；
-# res = cuesor.fetchone()
-#
-# print(res)
-#
-# # 第5步：关闭关闭对象；关闭数据库连接对象
-# cuesor.close()
-# conn.close()
+
+

@@ -1,5 +1,6 @@
 import  os
 import yaml
+import config.Conf
 
 class YamlReaber:
                                                         #先初始化；文件是否存在
@@ -33,3 +34,6 @@ class YamlReaber:
             with open(self.yamlfile,"rb") as f:              #打开文件
                 self._data_all = list(yaml.safe_load_all(f))  #使用yaml方法读取;多个文档则用safe_load_all()
         return  self._data_all
+
+if __name__ == '__main__':
+    print(YamlReaber(config.Conf.get_config_file()).data())

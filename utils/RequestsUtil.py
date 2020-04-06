@@ -1,35 +1,35 @@
 import requests
 from utils.logUtil import my_log
 from pprint import pprint
-
+from config.Conf import ConfigYaml
 #没有重构requests库中的post方法、get方法前的代码
-# #自定义方法;requests库中的get方法	废弃不用
-# def requests_get(url,headers=None,data=None):
-# 	r = requests.get(url=url,headers=headers,data=data)
-# 	code = r.status_code
-# 	try:
-# 		boby = r.json()
-# 	except Exception as e:
-# 		boby = r.text
-# 	res =dict()
-# 	res["code"] = code
-# 	res["boby"] = boby
-# 	return res
-#
-# #自定义方法;requests库中的post方法   废弃不用
-# def requests_post(url,headers=None,data=None,json=None):
-# 	r = requests.post(url=url,headers=headers,data=data,json=json)
-# 	code = r.status_code
-# 	try:
-# 		boby = r.json()
-# 	except Exception as e:
-# 		boby = r.text
-# 	res =dict()
-# 	res["code"] = code
-# 	res["boby"] = boby
-# 	return res
+#自定义方法;requests库中的get方法	废弃不用
+def requests_get(url,headers=None,data=None):
+	r = requests.get(url=url,headers=headers,data=data)
+	code = r.status_code
+	try:
+		boby = r.json()
+	except Exception as e:
+		boby = r.text
+	res =dict()
+	res["code"] = code
+	res["boby"] = boby
+	return res
 
-#重构requests库中的post方法、get方法
+#自定义方法;requests库中的post方法   废弃不用
+def requests_post(url,headers=None,data=None,json=None):
+	r = requests.post(url=url,headers=headers,data=data,json=json)
+	code = r.status_code
+	try:
+		boby = r.json()
+	except Exception as e:
+		boby = r.text
+	res =dict()
+	res["code"] = code
+	res["boby"] = boby
+	return res
+
+#重构requests库中的post方法、get方法  使用中
 class Request:
 
 	def __init__(self):
@@ -76,3 +76,8 @@ class Request:
 		:return: 调用request_api方法,method默认为post,并且传入随意参数;request_api方法支持headers,data,json,cookies
 		"""
 		return self.request_api(url,method="post",**kwargs)
+
+if __name__ == '__main__':
+	url = ConfigYaml().get_conf_url()+"/authorizations/"
+	data = {"username":"python","password":"12345678"}
+	print(Request().post(url=url,data=data))
