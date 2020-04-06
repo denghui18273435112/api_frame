@@ -4,8 +4,6 @@
 import pymysql
 from utils.logUtil import my_log
 
-
-
 class Mysql:
     def __init__(self,host,user,password,database,port,charset="utf8"):
         self.log = my_log()
@@ -74,7 +72,9 @@ if __name__ == '__main__':
 
 
 # #  没有封装前的代码
-# #导包
+#
+#
+# #第一个导pymysql
 # import pymysql
 #
 # #  第2步：链接数据库
@@ -84,7 +84,6 @@ if __name__ == '__main__':
 # database 连接的数据库；
 # charset 编码集； port 端口
 # """
-#
 # conn = pymysql.connect(
 #     host="211.103.136.242",
 #     user="test",
@@ -93,16 +92,18 @@ if __name__ == '__main__':
 #     charset = "utf8",
 #     port = 7090
 # )
+#
 # # 第3步：获取执行sql的光标对象
 # cuesor = conn.cursor()
 #
-# # 第4步： 执行sql
+# # 第4步： 执行sql的方法 execute
 # sql = "select username,password from tb_users"
 # cuesor.execute(sql)
-# res = cuesor.fetchall() #  打印  fetchone 单条信息；  fetchall()全部字段的信息；
+# # fetchone() 单条信息;fetchall()全部信息；
+# res = cuesor.fetchone()
 #
 # print(res)
 #
-# # 第5步：关闭对象
+# # 第5步：关闭关闭对象；关闭数据库连接对象
 # cuesor.close()
-#conn.close()
+# conn.close()

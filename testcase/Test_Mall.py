@@ -19,16 +19,16 @@ def login1():
 
 	r = Request().post(url=url,data=data)	#第一次重构
 	body = r["body"]
-	print(body)
+	user_id =  r["body"]["user_id"]
+	print("body的值为：%s"%body)
+	print("user_id的值为：%s"%user_id)
 
-	conn = init_db("db_1")
-	res_db = conn.fetchone("select id,username from tb_users where username='python' ")
+
+	res_db = init_db().fetchone("select id,username from tb_users where username='python' ")
 	print("数据库查询结果",res_db)
 
-	user_id = body["user_id"]
-
 	#assert user_id == res_db["id"]
-	
+
 	if user_id == res_db["id"]:
 		print("验证成功")
 	else:
