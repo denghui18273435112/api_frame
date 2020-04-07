@@ -25,4 +25,4 @@ for c in range(cols):
     print(c_values)
 
 #7、读取固定列的内容
-# print(sheet.cell(1,1))
+#print(sheet.cell(1,1))
