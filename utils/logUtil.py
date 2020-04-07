@@ -28,14 +28,15 @@ class Logger:
             self.logger_name.addHandler(fh_file)                            #第六步：添加handler
 
 def generate_file():
-    """
-    #1、初始化参数数据
-    #日志文件名称、日志文件级别
-    #日志文件名称=log目录+当前时间+扩展名
-    #log目录; #当前时间;#扩展名
-    #合并（log目录+当前时间+扩展名）并创建*.log文件  logfile返回G:\pycharm\script\api_frame\logs\2020-04-07.log
-    :return:  生成的日志文件名称
-    """
+    # """
+    # #1、初始化参数数据
+    # #日志文件名称、日志文件级别
+    # #日志文件名称=log目录+当前时间+扩展名
+    # #log目录; #当前时间;#扩展名
+    # #合并（log目录+当前时间+扩展名）并创建*.log文件  logfile返回G:\pycharm\script\api_frame\logs\2020-04-07.log
+    # :return:  生成的日志文件名称
+    # """
+
     log_path = Conf.get_log_path()
     current_time = datetime.datetime.now().strftime("%Y-%m-%d")
     log_extensiong = ConfigYaml().get_conf_log_extensiong()

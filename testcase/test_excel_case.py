@@ -128,19 +128,19 @@ class TestExcel:
         res = self.run_api(url, method, params, header,cookie)
         print("测试用例执行：%s" % res)
 
-        #allure
-        #sheet名称  feature 一级标签
-        allure.dynamic.feature(sheet_name)
-        #模块   story 二级标签
-        allure.dynamic.story(case_model)
-        #用例ID+接口名称  title
-        allure.dynamic.title(case_id+case_name)
-        #请求URL  请求类型 期望结果 实际结果描述
-        desc = "<font color='red'>请求URL: </font> {}<Br/>" \
-               "<font color='red'>请求类型: </font>{}<Br/>" \
-               "<font color='red'>期望结果: </font>{}<Br/>" \
-               "<font color='red'>实际结果: </font>{}".format(url,method,expect_result,res)
-        allure.dynamic.description(desc)
+        # #allure
+        # #sheet名称  feature 一级标签
+        # allure.dynamic.feature(sheet_name)
+        # #模块   story 二级标签
+        # allure.dynamic.story(case_model)
+        # #用例ID+接口名称  title
+        # allure.dynamic.title(case_id+case_name)
+        # #请求URL  请求类型 期望结果 实际结果描述
+        # desc = "<font color='red'>请求URL: </font> {}<Br/>" \
+        #        "<font color='red'>请求类型: </font>{}<Br/>" \
+        #        "<font color='red'>期望结果: </font>{}<Br/>" \
+        #        "<font color='red'>实际结果: </font>{}".format(url,method,expect_result,res)
+        # allure.dynamic.description(desc)
 
         #断言验证
         #状态码，返回结果内容，数据库相关的结果的验证
@@ -152,6 +152,7 @@ class TestExcel:
         #数据库结果断言
         Base.assert_db("db_1",res["body"],db_verify)
 
+        print("数据库断言结束")
 
         #1、初始化数据库
         # from common.Base import init_db
@@ -220,9 +221,11 @@ class TestExcel:
 
 if __name__ == '__main__':
     #pass
-    report_path = Conf.get_report_path()+os.sep+"result"
-    report_html_path = Conf.get_report_path()+os.sep+"html"
-    pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
+    # report_path = Conf.get_report_path()+os.sep+"result"
+    # report_html_path = Conf.get_report_path()+os.sep+"html"
+    # pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
+
+    TestExcel().test_run()
 
 
     #Base.allure_report("./report/result","./report/html")
