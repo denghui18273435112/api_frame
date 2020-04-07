@@ -11,25 +11,29 @@ from common import Base
 from utils.AssertUitl import AssertUitl
 import allure
 
-
-#1、初始化信息
-#1）.初始化测试用例文件
-case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
-#2）.测试用例sheet名称
-sheet_name = ConfigYaml().get_excel_sheet()
-#3）.获取运行测试用例列表
-data_init = Data(case_file,sheet_name)
-run_list = data_init.get_run_data()
-
-#4）.日志
-log = my_log()
 #初始化dataconfig
 data_key = ExcelConfig.DataConfig
-#2、测试用例方法，参数化运行
+
+def data_init():
+    """
+    return 获取运行测试用例列表
+    #1、初始化信息
+    #1）.初始化测试用例文件
+    #2）.测试用例sheet名称
+     #3）.获取运行测试用例列表
+    """
+    case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
+    sheet_name = ConfigYaml().get_excel_sheet()
+    return Data(case_file,sheet_name)
+
+def run_list():
+    """
+    #3）.获取运行测试用例列表
+    :return:
+    """
+    return data_init().get_run_data()
 
 
-
-#一个用例的执行
 class TestExcel:
     #1、增加Pyest
     #2、修改方法参数
@@ -54,7 +58,7 @@ class TestExcel:
         elif str(method).lower() == "post":
             res = request.post(url, json=params, headers=header, cookies=cookie)
         else:
-            log.error("错误请求method: %s" % method)
+            my_log().error("错误请求method: %s" % method)
 
         return res
 
@@ -86,7 +90,7 @@ class TestExcel:
 #1）.初始化信息，url,data
 
     # 1、增加Pyest
-    @pytest.mark.parametrize("case",run_list)
+    @pytest.mark.parametrize("case",run_list())
     # 2、修改方法参数
     def test_run(self,case):
         # 3、重构函数内容
@@ -114,7 +118,7 @@ class TestExcel:
             pass
         # 2、找到执行用例
             # 前置测试用例
-            pre_case = data_init.get_case_pre(pre_exec)
+            pre_case = data_init().get_case_pre(pre_exec)
             print("前置条件信息为：%s"%pre_case)
             pre_res = self.run_pre(pre_case)
             headers,cookies = self.get_correlation(headers,cookies,pre_res)
@@ -154,7 +158,7 @@ class TestExcel:
         # sql = init_db("db_1")
         # #2、查询sql，excel定义好的
         # db_res = sql.fetchone(db_verify)
-        # log.debug("数据库查询结果：{}".format(str(db_res)))
+        # my_log().debug("数据库查询结果：{}".format(str(db_res)))
         # #3、数据库的结果与接口返回的结果验证
         # #获取数据库结果的key
         # verify_list = list(dict(db_res).keys())
@@ -188,7 +192,7 @@ class TestExcel:
         # elif str(method).lower()=="post":
         #     res = request.post(url, json=params,headers = header,cookies=cookie)
         # else:
-        #     log.error("错误请求method: %s"%method)
+        #     my_log().error("错误请求method: %s"%method)
         # print(res)
 #TestExcel().test_run()
 
@@ -215,10 +219,10 @@ class TestExcel:
 
 
 if __name__ == '__main__':
-    pass
-    # report_path = Conf.get_report_path()+os.sep+"result"
-    # report_html_path = Conf.get_report_path()+os.sep+"html"
-    # pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
+    #pass
+    report_path = Conf.get_report_path()+os.sep+"result"
+    report_html_path = Conf.get_report_path()+os.sep+"html"
+    pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
 
 
     #Base.allure_report("./report/result","./report/html")

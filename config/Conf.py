@@ -9,7 +9,6 @@ _db_config_file = _config_path +os.sep+"db_conf.yaml"     #定义db_conf.yaml的
 _log_path = BASE_DIR +os.sep+"logs"                        #定义log文件生产路径
 _data_path =BASE_DIR +os.sep+"data"                        #定义data文件的路径
 
-
 def get_config_path():
     """
     :return: config文件夹的路径
@@ -44,12 +43,10 @@ class ConfigYaml:
     """
     此类的主要功能获取yaml文件中的数据;
     """
-
     def __init__(self):
         """
         #读取配置文件
         #创建类；初始化yaml读取配置文件；
-
         self.config return  遍历  get_config_file方法中conf.yaml文件的所有值
         self.config_all return 遍历   get_config_file方法中conf.yaml文件的所有值
         self.db_config  return 遍历   get_config_file方法中 db_conf.yaml文件的所有值
