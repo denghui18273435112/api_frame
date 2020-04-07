@@ -44,6 +44,7 @@ class Request:
 		:param cookies: 默认不传
 		:param method: 默认为get
 		:return:  res字典由code和body组成
+		#status_code获取状态码
 		"""
 		if method=="get":
 			self.log.debug("发送get请求")
@@ -57,7 +58,7 @@ class Request:
 		except Exception as e:
 			body = r.text
 		res =dict()
-		res["code"] = r.status_code				#status_code获取状态码
+		res["code"] = r.status_code
 		res["body"] = body
 		return res
 

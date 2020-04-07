@@ -4,7 +4,7 @@ import json
 
 class AssertUitl:
     def __init__(self):
-        self.log = my_log("AssertUilt")
+        self.my_log = my_log("AssertUilt")
 
     def assert_code(self,code,expected_code):
         """
@@ -21,7 +21,7 @@ class AssertUitl:
             assert  int(code) == int(expected_code)
             return "两个code一致"
         except:
-            self.log.error("code error; code is {0},expected_code is {1}".format(code,expected_code))
+            self.my_log.error("code error; code is {0},expected_code is {1}".format(code,expected_code))
             raise
 
     def assert_body(self,body,expected_body):
@@ -35,7 +35,7 @@ class AssertUitl:
             assert  body == expected_body
             return  "两个body相同"
         except:
-            self.log.error("body error; body is {0},expected_body is {1}".format(body,expected_body))
+            self.my_log.error("body error; body is {0},expected_body is {1}".format(body,expected_body))
             raise
 
     def assert_int_body(self,body,expected_body):
@@ -50,7 +50,7 @@ class AssertUitl:
             assert  expected_body in body
             return  True
         except:
-            self.log.error("不包含或者body错误; body is {0},expected_body is {1}".format(body,expected_body))
+            self.my_log.error("不包含或者body错误; body is {0},expected_body is {1}".format(body,expected_body))
             raise
 
 if __name__ == '__main__':
