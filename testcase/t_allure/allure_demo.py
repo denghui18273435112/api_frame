@@ -1,7 +1,7 @@
+# coding=utf-8
 import pytest
 import allure
-# #测试方法
-
+#测试方法
 @allure.feature("接口测试，这是一个一级标签")
 class TestAllure:
     @allure.title("测试用例标题1")
@@ -30,4 +30,4 @@ class TestAllure:
         allure.dynamic.title(case)
 
 if __name__ == '__main__':
-    pytest.main(["allure_demo.py"])
+    pytest.main(["allure_demo.py","r","s"])
