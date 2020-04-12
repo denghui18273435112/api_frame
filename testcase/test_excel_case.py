@@ -1,4 +1,5 @@
 from config.Conf import ConfigYaml
+
 from config import Conf
 import os
 from common.ExcelData import Data
@@ -11,27 +12,38 @@ from common import Base
 from utils.AssertUitl import AssertUitl
 import allure
 
+#1、初始化信息
+#1）.初始化测试用例文件
+case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
+#2）.测试用例sheet名称
+sheet_name = ConfigYaml().get_excel_sheet()
+#3）.获取运行测试用例列表
+data_init = Data(case_file,sheet_name)
+run_list = data_init.get_run_data()
+
+#4）.日志
+log = my_log()
+#初始化dataconfig
+data_key = ExcelConfig.DataConfig
+#2、测试用例方法，参数化运行
+#一个用例的执行
+
+
+
 #初始化dataconfig
 data_key = ExcelConfig.DataConfig
 
-def data_init():
-    """
-    return 获取运行测试用例列表
-    #1、初始化信息
-    #1）.初始化测试用例文件
-    #2）.测试用例sheet名称
-     #3）.获取运行测试用例列表
-    """
-    case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
-    sheet_name = ConfigYaml().get_excel_sheet()
-    return Data(case_file,sheet_name)
-
-def run_list():
-    """
-    #3）.获取运行测试用例列表
-    :return:
-    """
-    return data_init().get_run_data()
+# def data_init():
+#     """
+#     return 获取运行测试用例列表
+#     #1、初始化信息
+#     #1）.初始化测试用例文件
+#     #2）.测试用例sheet名称
+#      #3）.获取运行测试用例列表
+#     """
+#     case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
+#     sheet_name = ConfigYaml().get_excel_sheet()
+#     return Data(case_file,sheet_name)
 
 
 class TestExcel:
@@ -90,14 +102,16 @@ class TestExcel:
 #1）.初始化信息，url,data
 
     # 1、增加Pyest
-    @pytest.mark.parametrize("case",run_list())
+    @pytest.mark.parametrize("case",run_list)
     # 2、修改方法参数
     def test_run(self,case):
+
+
+
         # 3、重构函数内容
         #data_key = ExcelConfig.DataConfig
         # run_list第1个用例，用例，key获取values
         url = ConfigYaml().get_conf_url()+case[data_key.url]
-        print(url)
         case_id = case[data_key.case_id]
         case_model = case[data_key.case_model]
         case_name = case[data_key.case_name]
@@ -118,7 +132,7 @@ class TestExcel:
             pass
         # 2、找到执行用例
             # 前置测试用例
-            pre_case = data_init().get_case_pre(pre_exec)
+            pre_case = data_init.get_case_pre(pre_exec)
             print("前置条件信息为：%s"%pre_case)
             pre_res = self.run_pre(pre_case)
             headers,cookies = self.get_correlation(headers,cookies,pre_res)
@@ -128,19 +142,22 @@ class TestExcel:
         res = self.run_api(url, method, params, header,cookie)
         print("测试用例执行：%s" % res)
 
-        # #allure
-        # #sheet名称  feature 一级标签
-        # allure.dynamic.feature(sheet_name)
-        # #模块   story 二级标签
-        # allure.dynamic.story(case_model)
-        # #用例ID+接口名称  title
-        # allure.dynamic.title(case_id+case_name)
-        # #请求URL  请求类型 期望结果 实际结果描述
-        # desc = "<font color='red'>请求URL: </font> {}<Br/>" \
-        #        "<font color='red'>请求类型: </font>{}<Br/>" \
-        #        "<font color='red'>期望结果: </font>{}<Br/>" \
-        #        "<font color='red'>实际结果: </font>{}".format(url,method,expect_result,res)
-        # allure.dynamic.description(desc)
+        #allure
+        #sheet名称  feature 一级标签
+        allure.dynamic.feature(sheet_name)
+        #模块   story 二级标签
+        allure.dynamic.story(case_model)
+        #用例ID+接口名称  title
+        allure.dynamic.title(case_id+case_name)
+        #请求URL  请求类型 期望结果 实际结果描述
+        desc = "<font color='red'>请求URL: </font> {}<Br/>" \
+               "<font color='red'>请求类型: </font>{}<Br/>" \
+               "<font color='red'>期望结果: </font>{}<Br/>" \
+               "<font color='red'>实际结果: </font>{}".format(url,method,expect_result,res)
+        allure.dynamic.description(desc)
+
+
+
 
         #断言验证
         #状态码，返回结果内容，数据库相关的结果的验证
@@ -152,7 +169,7 @@ class TestExcel:
         #数据库结果断言
         Base.assert_db("db_1",res["body"],db_verify)
 
-        print("数据库断言结束")
+
 
         #1、初始化数据库
         # from common.Base import init_db
@@ -219,17 +236,24 @@ class TestExcel:
         return headers,cookies
 
 
+
+
+
 if __name__ == '__main__':
+
+    #TestExcel().test_run()
+
+    #--alluredir
+
     #pass
-    # report_path = Conf.get_report_path()+os.sep+"result"
-    # report_html_path = Conf.get_report_path()+os.sep+"html"
-    # pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
-
-    TestExcel().test_run()
+    report_path = Conf.get_report_path()+os.sep+"result"
+    report_html_path = Conf.get_report_path()+os.sep+"html"
+    pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
 
 
-    #Base.allure_report("./report/result","./report/html")
-    #Base.send_mail(title="接口测试报告结果",content=report_html_path)
+    Base.allure_report(report_path,report_html_path)
+    Base.send_mail(title="接口测试报告结果",content=report_html_path)
+
     #固定headers请求
     #1.判断headers是否存在，json转义，无需
     #2.增加Headers

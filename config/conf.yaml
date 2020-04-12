@@ -12,3 +12,10 @@ test_environment1: #测试环境的地址
 BASE:
   case_file: "testdata.xlsx"
   case_sheet: "美多商城接口测试"
+
+
+email:
+  smtpserver: "smtp.qq.com"
+  username: "1315270232@qq.com"
+  password: "shqwihtlifxojheg"
+  receiver: "314983713@qq.com"

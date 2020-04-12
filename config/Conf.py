@@ -1,5 +1,5 @@
 import os
-from utils.YamlUtil import YamlReaber
+import utils.YamlUtil
 
 current =os.path.abspath(__file__)                          #当前文件的路径
 BASE_DIR = os.path.dirname(os.path.dirname(current))        # 当前项目的绝对路径
@@ -8,6 +8,14 @@ _config_file = _config_path +os.sep+"conf.yaml"            #定义conf.yaml的�
 _db_config_file = _config_path +os.sep+"db_conf.yaml"     #定义db_conf.yaml的路径
 _log_path = BASE_DIR +os.sep+"logs"                        #定义log文件生产路径
 _data_path =BASE_DIR +os.sep+"data"                        #定义data文件的路径
+_report_path =BASE_DIR +os.sep+"report"                        #定义report文件的路径
+
+def get_report_path():
+    """
+    :return: report文件夹的绝对路径
+    """
+    return  _report_path
+
 
 def get_config_path():
     """
@@ -39,6 +47,7 @@ def get_log_path():
     """
     return _log_path
 
+
 class ConfigYaml:
     """
     此类的主要功能获取yaml文件中的数据;
@@ -52,9 +61,16 @@ class ConfigYaml:
         self.db_config  return 遍历   get_config_file方法中 db_conf.yaml文件的所有值
         :return:
         """
-        self.config = YamlReaber(get_config_file()).data()
-        self.config_all = YamlReaber(get_config_file()).data_all()
-        self.db_config = YamlReaber(get_db_config_cpath()).data()
+        self.config = utils.YamlUtil.YamlReaber(get_config_file()).data()
+        self.config_all = utils.YamlUtil.YamlReaber(get_config_file()).data_all()
+        self.db_config = utils.YamlUtil.YamlReaber(get_db_config_cpath()).data()
+
+    def get_report_path(self):
+        """
+        :return: report文件夹的绝对路径
+        """
+        return  _report_path
+
 
     def get_excel_file(self):# 获取
         """
@@ -93,11 +109,24 @@ class ConfigYaml:
         """
         return  self.db_config[db_alias]
 
+
+    def get_email_info(self):
+        """
+        :param  获取eamil的相关信息
+        :return:
+        """
+        return self.config["email"]
+
 if __name__ == '__main__':
-    pass
+
+    #pass
     #print(ConfigYaml().get_conf_url())
     #print(ConfigYaml().get_conf_log())
     #print(ConfigYaml().get_conf_log_extensiong())
     #print(ConfigYaml().get_db_conf_info("db_1"))
     # print(ConfigYaml().get_excel_file())
-    # print(ConfigYaml().get_excel_sheet())
+    #print(ConfigYaml().get_excel_sheet())
+    print(ConfigYaml().get_email_info())
+
+
+

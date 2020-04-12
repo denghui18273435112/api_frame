@@ -54,4 +54,4 @@ class AssertUitl:
             raise
 
 if __name__ == '__main__':
-    AssertUitl().assert_code(200,300)
+    AssertUitl().assert_code(200,200)

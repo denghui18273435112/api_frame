@@ -3,6 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/pytest.ini" charset="GBK" />
     <file url="file://$PROJECT_DIR$/utils/logUtil.py" charset="UTF-8" />
-    <file url="PROJECT" charset="UTF-8" />
+    <file url="PROJECT" charset="GBK" />
   </component>
 </project>
