@@ -29,21 +29,9 @@ data_key = ExcelConfig.DataConfig
 #一个用例的执行
 
 
+report_path = Conf.get_report_path()+os.sep+"result"
+report_html_path = Conf.get_report_path()+os.sep+"html"
 
-#初始化dataconfig
-data_key = ExcelConfig.DataConfig
-
-# def data_init():
-#     """
-#     return 获取运行测试用例列表
-#     #1、初始化信息
-#     #1）.初始化测试用例文件
-#     #2）.测试用例sheet名称
-#      #3）.获取运行测试用例列表
-#     """
-#     case_file = os.path.join(Conf.get_data_path(),ConfigYaml().get_excel_file())
-#     sheet_name = ConfigYaml().get_excel_sheet()
-#     return Data(case_file,sheet_name)
 
 
 class TestExcel:
@@ -112,6 +100,7 @@ class TestExcel:
         #data_key = ExcelConfig.DataConfig
         # run_list第1个用例，用例，key获取values
         url = ConfigYaml().get_conf_url()+case[data_key.url]
+        print(url)
         case_id = case[data_key.case_id]
         case_model = case[data_key.case_model]
         case_name = case[data_key.case_name]
@@ -236,58 +225,12 @@ class TestExcel:
         return headers,cookies
 
 
-
-
-
 if __name__ == '__main__':
-
-    #TestExcel().test_run()
-
-    #--alluredir
-
-    #pass
-    report_path = Conf.get_report_path()+os.sep+"result"
-    report_html_path = Conf.get_report_path()+os.sep+"html"
+    #pytest运行前会提前运行pytest.ini文件的内容; 运行文件test_excel_case.py;alluredir pytest报告生成路径;后面更路径
     pytest.main(["-s","test_excel_case.py","--alluredir",report_path])
-
-
     Base.allure_report(report_path,report_html_path)
-    Base.send_mail(title="接口测试报告结果",content=report_html_path)
+    Base.send_mail(content=report_path,title="测试自动发送邮件")
 
-    #固定headers请求
-    #1.判断headers是否存在，json转义，无需
-    #2.增加Headers
-    #3.增加cookies
-    #4.发送请求
-
-    #动态关联
-    #1、验证前置条件
-    #if pre_exec:
-    #pass
-    #2、找到执行用例
-    #3、发送请求，获取前置用例结果
-    #发送获取前置测试用例，用例结果
-    #数据初始化，get/post，重构
-    #4、替换Headers变量
-        #1、验证请求中是否${}$，返回${}$内容
-    # str1 = '{"Authorization": "JWT ${token}$"}'
-    # if "${" in str1:
-    #     print(str1)
-    # import re
-    # pattern = re.compile('\${(.*)}\$')
-    # re_res = pattern.findall(str1)
-    # print(re_res[0])
-    #     #2、根据内容token，查询 前置条件测试用例返回结果token = 值
-    # token = "123"
-    #     #3、根据变量结果内容，替换
-    # res = re.sub(pattern,token,str1)
-    # print(res)
-   # 5、请求发送
-
-    #1、查询，公共方法
-    #2、替换，公共方法
-    #3、验证请求中是否${}$，返回${}$内容，公共方法
-    #4、关联方法
 
 
 

@@ -89,27 +89,25 @@ def params_find(headers,cookies):
 
 def allure_report(report_path,report_html):
     """
-    生成allure 报告
-    :param report_path:
-    :param report_html:
+    自动生成allure 报告
+    :param report_path: pytest.main运行 生成文件的存放位置
+    :param report_html: allure生成报告存放位置
     :return:
     """
-    #执行命令 allure generate
     allure_cmd ="allure generate %s -o %s --clean"%(report_path,report_html)
-    print("运行到这里了没")
-    log.info("报告地址")
     try:
         subprocess.call(allure_cmd,shell=True)
+        my_log().info("自动生成allure 报告成功")
     except:
         log.error("执行用例失败，请检查一下测试环境相关配置")
         raise
 
-def send_mail(report_html_path="",content="",title="测试"):
+def send_mail(report_html_path="",content="测试",title="测试"):
     """
-    发送邮件
+    自动化发送邮件方法
     :param report_html_path:
-    :param content:
-    :param title:
+    :param content:  邮件内容;默认为测试
+    :param title:  邮件标题;默认为测试
     :return:
     """
     email_info = ConfigYaml().get_email_info()
@@ -118,13 +116,13 @@ def send_mail(report_html_path="",content="",title="测试"):
     password = email_info["password"]
     recv = email_info["receiver"]
     email = SendEmail(
-        smtp_addr=smtp_addr,
-        username=username,
-        password=password,
-        recv=recv,
-        title=title,
-        content=content,
-        file=report_html_path)
+        smtp_addr=smtp_addr,            #邮箱的服务器地址
+        username=username,              #发送账号
+        password=password,              #发送密码 pp3
+        recv=recv,                      #接口账号
+        title=title,                    #邮件标题
+        content=content,                #邮件内容
+        file=report_html_path)          #附件
     email.send_mail()
 
 def assert_db(db_name,result,db_verify):

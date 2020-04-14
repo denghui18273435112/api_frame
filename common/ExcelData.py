@@ -21,6 +21,7 @@ class Data:
         for line in self.reader.data():
             if str(line[DataConfig().is_run]).lower() == "y":
                 run_list.append(line)
+        print("运行用例",run_list)
         return run_list
 
     def get_case_list(self):
