@@ -157,14 +157,17 @@ def assert_db(db_name,result,db_verify):
         assert_util.assert_body(res_line, res_db_line)
 
 def report_path():
+    #return  "E:\jenkins\install\workspace\AutoTest_JOB"
     return  Conf.get_report_path()+os.sep+"{}-result".format(str(datetime.now().strftime("%Y%m%d%H%M")))
+    #return  Conf.get_report_path()+os.sep+"result"
 
 def report_html_path():
     return Conf.get_report_path()+os.sep+"{}--html".format(str(datetime.now().strftime("%Y%m%d%H%M")))
+    #return Conf.get_report_path()+os.sep+"html"
 
 if __name__ == '__main__':
-    pass
+
     print(init_db("db_1"))
     print(res_find( '{"Authorization": "JWT ${token}$"}'))
     print(res_sub( '{"Authorization": "JWT ${token}$"}',"123"))
-    #print(params_find())
+
