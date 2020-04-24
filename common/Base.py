@@ -9,6 +9,7 @@ import subprocess
 from utils.EmailUtil import  SendEmail
 from config import Conf
 import os
+import datetime
 
 p_data = '\\${(.*)}\\$'
 log = my_log()
@@ -154,7 +155,8 @@ def assert_db(db_name,result,db_verify):
         assert_util.assert_body(res_line, res_db_line)
 
 def report_path():
-
+    now_time = datetime.datetime.now()
+    result="result"+str(now_time)
     return  Conf.get_report_path()+os.sep+"result"
 
 def report_html_path():
