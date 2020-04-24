@@ -104,7 +104,7 @@ def allure_report(report_path,report_html):
 
 def send_mail(report_html_path="",content="测试",title="测试"):
     """
-    自动化发送邮件方法
+    自动化发送邮件方法；初始化 发送邮件的相关参数
     :param report_html_path:
     :param content:  邮件内容;默认为测试
     :param title:  邮件标题;默认为测试
@@ -115,7 +115,7 @@ def send_mail(report_html_path="",content="测试",title="测试"):
     username = email_info["username"]
     password = email_info["password"]
     recv = email_info["receiver"]
-    email = SendEmail(
+    email = SendEmail(                  #初始化 发送邮件的相关参数
         smtp_addr=smtp_addr,            #邮箱的服务器地址
         username=username,              #发送账号
         password=password,              #发送密码 pp3

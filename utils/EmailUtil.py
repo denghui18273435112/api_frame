@@ -42,17 +42,17 @@ if __name__ == "__main__":
     #初始化类(self,smtp_addr,username,password,recv,
             #     title,content=None,file=None):
 
-    # 没封装前
-    # from config.Conf import ConfigYaml
-    # email_info = ConfigYaml().get_email_info()
-    # smtp_addr = email_info["smtpserver"]
-    # username = email_info["username"]
-    # password = email_info["password"]
-    # recv = email_info["receiver"]
-    # email = SendEmail(smtp_addr,username,password,recv,"测试CEHISA DAS")
-    #email.send_mail()
+    #没封装前
+    from config.Conf import ConfigYaml
+    email_info = ConfigYaml().get_email_info()
+    smtp_addr = email_info["smtpserver"]
+    username = email_info["username"]
+    password = email_info["password"]
+    recv = email_info["receiver"]
+    email = SendEmail(smtp_addr,username,password,recv,"测试CEHISA DAS")
+    email.send_mail()
 
-    pass
+
 
     #封装公共方法
     #应用测试发送
