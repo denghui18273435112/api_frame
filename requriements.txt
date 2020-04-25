@@ -1,5 +1,3 @@
-#依赖安装
-
 parso==0.4.0
 pexpect==4.7.0
 pickleshare==0.7.5
