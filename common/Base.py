@@ -158,8 +158,8 @@ def assert_db(db_name,result,db_verify):
 
 def report_path():
     #return  "E:\jenkins\install\workspace\AutoTest_JOB"
-    return  Conf.get_report_path()+os.sep+"{}-result".format(str(datetime.now().strftime("%Y%m%d%H%M")))
-    #return  Conf.get_report_path()+os.sep+"result"
+    #return  Conf.get_report_path()+os.sep+"{}-result".format(str(datetime.now().strftime("%Y%m%d%H%M")))
+    return  Conf.get_report_path()+os.sep+"result"
 
 def report_html_path():
     return Conf.get_report_path()+os.sep+"{}--html".format(str(datetime.now().strftime("%Y%m%d%H%M")))
