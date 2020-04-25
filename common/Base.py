@@ -162,8 +162,8 @@ def report_path():
     return  Conf.get_report_path()+os.sep+"result"
 
 def report_html_path():
-    return Conf.get_report_path()+os.sep+"{}--html".format(str(datetime.now().strftime("%Y%m%d%H%M")))
-    #return Conf.get_report_path()+os.sep+"html"
+    #return Conf.get_report_path()+os.sep+"{}--html".format(str(datetime.now().strftime("%Y%m%d%H%M")))
+    return Conf.get_report_path()+os.sep+"html"
 
 if __name__ == '__main__':
 
