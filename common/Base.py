@@ -166,7 +166,7 @@ def report_html_path():
 
 if __name__ == '__main__':
 
-    print(init_db("db_1"))
+    #print(init_db("db_1"))
     print(res_find( '{"Authorization": "JWT ${token}$"}'))
     print(res_sub( '{"Authorization": "JWT ${token}$"}',"123"))
 
