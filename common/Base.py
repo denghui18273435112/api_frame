@@ -165,8 +165,9 @@ def report_html_path():
     return Conf.get_report_path()+os.sep+"html"
 
 if __name__ == '__main__':
-
+    pass
+    
     #print(init_db("db_1"))
-    print(res_find( '{"Authorization": "JWT ${token}$"}'))
-    print(res_sub( '{"Authorization": "JWT ${token}$"}',"123"))
+    # print(res_find( '{"Authorization": "JWT ${token}$"}'))
+    # print(res_sub( '{"Authorization": "JWT ${token}$"}',"123"))
 
