@@ -10,6 +10,7 @@ import pytest
 from common import Base
 from utils.AssertUitl import AssertUitl
 import allure
+from datetime import datetime
 
 #1、初始化信息
 #1）.初始化测试用例文件
@@ -138,10 +139,11 @@ class TestExcel:
         #用例ID+接口名称  title
         allure.dynamic.title(case_id+case_name)
         #请求URL  请求类型 期望结果 实际结果描述
-        desc = "<font color='red'>请求URL: </font> {}<Br/>" \
+        desc = "<font color='red'>当前执行时间: </font> {}<Br/>" \
+                "<font color='red'>请求URL: </font> {}<Br/>" \
                "<font color='red'>请求类型: </font>{}<Br/>" \
                "<font color='red'>期望结果: </font>{}<Br/>" \
-               "<font color='red'>实际结果: </font>{}".format(url,method,expect_result,res)
+               "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y%m%d%H%M")),url,method,expect_result,res)
         allure.dynamic.description(desc)
 
 
