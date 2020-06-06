@@ -92,7 +92,7 @@ class TestExcel:
     # 1、增加Pyest
     @pytest.mark.parametrize("case",run_list)
     # 2、修改方法参数
-    def tttest_run(self,case):
+    def ttbbtest_run(self,case):
 
 
 
