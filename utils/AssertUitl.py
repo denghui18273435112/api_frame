@@ -51,11 +51,11 @@ class AssertUitl:
             assert  expected_body in body
             return  True
         except:
-            self.my_log.error("不包含或者body错误; body is {0},expected_body is {1}".format(body,expected_body))
+            self.my_log.error("不包含或者body错误; 接口请求所返回的bodybody is {0}, 需要对比的bodyexpected_body is {1}".format(body,expected_body))
             raise
 
 if __name__ == '__main__':
 
     a={'username': 'python', 'user_id': 1, 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTI3MTg2NjIsInVzZXJuYW1lIjoicHl0aG9uIiwiZW1haWwiOiI5NTI2NzM2MzhAcXEuY29tIiwidXNlcl9pZCI6MX0.njna_85CMoCiviEfJH9ujcPotcM0mZVnCJUk_DVI4q4'}
     b={'user_id': 1}
-    AssertUitl().assert_int_body(2,1)
+    AssertUitl().assert_int_body(1,1)
