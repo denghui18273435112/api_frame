@@ -55,4 +55,7 @@ class AssertUitl:
             raise
 
 if __name__ == '__main__':
-    AssertUitl().assert_code(200,200)
+
+    a={'username': 'python', 'user_id': 1, 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTI3MTg2NjIsInVzZXJuYW1lIjoicHl0aG9uIiwiZW1haWwiOiI5NTI2NzM2MzhAcXEuY29tIiwidXNlcl9pZCI6MX0.njna_85CMoCiviEfJH9ujcPotcM0mZVnCJUk_DVI4q4'}
+    b={'user_id': 1}
+    AssertUitl().assert_int_body(2,1)
