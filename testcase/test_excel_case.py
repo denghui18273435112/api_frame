@@ -150,10 +150,11 @@ class TestExcel:
         #断言验证
         #状态码，返回结果内容，数据库相关的结果的验证
         #状态码
+        #assert_util = AssertUitl()
         AssertUitl().assert_code(int(res["code"]),int(code))
 
         #返回结果内容
-        assert_util.assert_int_body(str(res["body"]),str(expect_result))
+        AssertUitl().assert_int_body(str(res["body"]),str(expect_result))
 
         #数据库结果断言
         #Base.assert_db("db_1",res["body"],db_verify)
