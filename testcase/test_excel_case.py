@@ -99,8 +99,8 @@ class TestExcel:
         # 3、重构函数内容
         #data_key = ExcelConfig.DataConfig
         # run_list第1个用例，用例，key获取values
+        #获取表格上字段的信息
         url = ConfigYaml().get_conf_url()+case[data_key.url]
-        print(url)
         case_id = case[data_key.case_id]
         case_model = case[data_key.case_model]
         case_name = case[data_key.case_name]
