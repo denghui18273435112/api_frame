@@ -1,4 +1,5 @@
 from config.Conf import ConfigYaml
+import pprint
 from config import Conf
 import os
 from common.ExcelData import Data
@@ -143,7 +144,7 @@ class TestExcel:
                 "<font color='red'>请求URL: </font> {}<Br/>" \
                "<font color='red'>请求类型: </font>{}<Br/>" \
                "<font color='red'>期望结果: </font>{}<Br/>" \
-               "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),url,method,expect_result,res)
+               "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),url,method,pprint.pformat(expect_result),pprint.pformat(res))
         allure.dynamic.description(desc)
 
 
