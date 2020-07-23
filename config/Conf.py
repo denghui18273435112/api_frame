@@ -5,6 +5,7 @@ current =os.path.abspath(__file__)                          #当前文件的路�
 BASE_DIR = os.path.dirname(os.path.dirname(current))        # 当前项目的绝对路径
 _config_path = BASE_DIR +os.sep+"config"                   #定义config的路径
 _config_file = _config_path +os.sep+"conf.yaml"            #定义conf.yaml的路径
+_yonglie_file = _config_path +os.sep+"yonglie.yaml"            #定义conf.yaml的路径
 _db_config_file = _config_path +os.sep+"db_conf.yaml"     #定义db_conf.yaml的路径
 _log_path = BASE_DIR +os.sep+"logs"                        #定义log文件生产路径
 _data_path =BASE_DIR +os.sep+"data"                        #定义data文件的路径
@@ -35,6 +36,12 @@ def get_config_file():
     """
     return  _config_file
 
+def get_yonglie_file():
+    """
+    :return: conf.yaml文件所在的路径
+    """
+    return  _yonglie_file
+
 def get_data_path():
     """
     :return: data文件夹所在路径
@@ -46,6 +53,9 @@ def get_log_path():
     :return: logs文件夹的路径
     """
     return _log_path
+
+
+
 
 
 class ConfigYaml:
@@ -62,6 +72,7 @@ class ConfigYaml:
         :return:
         """
         self.config = utils.YamlUtil.YamlReaber(get_config_file()).data()
+        self.config = utils.YamlUtil.YamlReaber(get_yonglie_file()).data()
         self.config_all = utils.YamlUtil.YamlReaber(get_config_file()).data_all()
         self.db_config = utils.YamlUtil.YamlReaber(get_db_config_cpath()).data()
 
@@ -70,6 +81,13 @@ class ConfigYaml:
         :return: report文件夹的绝对路径
         """
         return  _report_path
+
+    def get_yonglie_file(self):
+        """
+        :return: report文件夹的绝对路径
+        """
+        return  _yonglie_file
+
 
 
     def get_excel_file(self):# 获取
@@ -126,7 +144,7 @@ if __name__ == '__main__':
     #print(ConfigYaml().get_db_conf_info("db_1"))
     # print(ConfigYaml().get_excel_file())
     #print(ConfigYaml().get_excel_sheet())
-    print(ConfigYaml().get_email_info())
+    print(ConfigYaml().get_yonglie_file())
 
 
 

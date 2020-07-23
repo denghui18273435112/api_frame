@@ -1,0 +1,16 @@
+---
+case001:
+  case_id: "login_4"
+  case_model: "µÇÂ¼"
+  case_name: "µÇÂ¼³É¹¦"
+  url: "/authorizations/"
+  pre_exec: ""
+  method: "POST"
+  params_type: "json"
+  params: '{"username":"python","password":"12345678"}'
+  expect_result: "test123456"
+  is_run: "Y"
+  headers: "test123456"
+  cookies: "111111"
+  code: "200"
+  db_verify: "111111"
