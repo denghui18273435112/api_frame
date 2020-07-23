@@ -36,11 +36,7 @@ def get_config_file():
     """
     return  _config_file
 
-def get_yonglie_file():
-    """
-    :return: conf.yaml文件所在的路径
-    """
-    return  _yonglie_file
+
 
 def get_data_path():
     """
@@ -72,7 +68,6 @@ class ConfigYaml:
         :return:
         """
         self.config = utils.YamlUtil.YamlReaber(get_config_file()).data()
-        self.config = utils.YamlUtil.YamlReaber(get_yonglie_file()).data()
         self.config_all = utils.YamlUtil.YamlReaber(get_config_file()).data_all()
         self.db_config = utils.YamlUtil.YamlReaber(get_db_config_cpath()).data()
 
@@ -144,7 +139,7 @@ if __name__ == '__main__':
     #print(ConfigYaml().get_db_conf_info("db_1"))
     # print(ConfigYaml().get_excel_file())
     #print(ConfigYaml().get_excel_sheet())
-    print(ConfigYaml().get_yonglie_file())
+    print(ConfigYaml().get_config_file())
 
 
 
