@@ -47,7 +47,7 @@ class AssertUitl:
         """
         try:
             body = json.dumps(body)
-            expected_body = json.dumps(expected_body)
+            #expected_body = json.dumps(expected_body)
             # print("验证返回结果是否包含",body,expected_body)
             # print(body)
             # print(expected_body)
