@@ -47,7 +47,12 @@ class AssertUitl:
         """
         try:
             body = json.dumps(body)
-            print("验证返回结果是否包含",body)
+            expected_body = json.dumps(expected_body)
+            # print("验证返回结果是否包含",body,expected_body)
+            # print(body)
+            # print(expected_body)
+            # print(type(body))
+            # print(type(expected_body))
             assert  expected_body in body
             return  True
         except:
@@ -58,4 +63,4 @@ if __name__ == '__main__':
 
     a={'username': 'python', 'user_id': 1, 'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTI3MTg2NjIsInVzZXJuYW1lIjoicHl0aG9uIiwiZW1haWwiOiI5NTI2NzM2MzhAcXEuY29tIiwidXNlcl9pZCI6MX0.njna_85CMoCiviEfJH9ujcPotcM0mZVnCJUk_DVI4q4'}
     b={'user_id': 1}
-    AssertUitl().assert_int_body(1,1)
+    AssertUitl().assert_int_body(a,b)
