@@ -156,7 +156,7 @@ class TestExcel:
         AssertUitl().assert_code(int(res["code"]),int(code))
 
         #返回结果内容
-        #AssertUitl().assert_int_body(str(res["body"]),str(expect_result))
+        AssertUitl().assert_int_body(str(res["body"]),str(expect_result))
 
         #数据库结果断言
         #Base.assert_db("db_1",res["body"],db_verify)
