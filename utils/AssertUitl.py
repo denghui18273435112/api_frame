@@ -62,8 +62,6 @@ class AssertUitl:
 
 if __name__ == '__main__':
 
-    a="{'order_id': '20200824021224000000001'}"
-    b={'order_id': '20200824021224000000003','order_id': '20200824021224000000003','order_id': '20200824021224000000001'}
-    print(type(eval(a)))
-    print(type(b))
-    AssertUitl().assert_int_body(a,str(b))
+    a="non_field_errors': ['无效数据。期待为字典类型，得到的是 str 。']"
+    b={'non_field_errors': ['无效数据。期待为字典类型，得到的是 str 。']}
+    AssertUitl().assert_int_body(a,b)
