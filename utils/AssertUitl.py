@@ -19,7 +19,7 @@ class AssertUitl:
         """
         try:
             assert  int(code) == int(expected_code)
-            return "两个code一致"
+            return True
         except:
             self.my_log.error("code error; code is {0},expected_code is {1}".format(code,expected_code))
             raise
@@ -33,7 +33,7 @@ class AssertUitl:
         """
         try:
             assert  body == expected_body
-            return  "两个body相同"
+            return  True
         except:
             self.my_log.error("body error; body is {0},expected_body is {1}".format(body,expected_body))
             raise
@@ -42,26 +42,44 @@ class AssertUitl:
         """
         验证返回结果是否包含
         :param body:            接口请求所返回的body
-        :param expected_body:  需要对比的body
+        :param expected_body:  表格取的需要对比的body
         :return:
         """
         try:
-            body = json.dumps(body)
-
-            #expected_body = json.dumps(expected_body)
-            # print("验证返回结果是否包含",body,expected_body)
-            # print(body)
-            # print(expected_body)
-            # print(type(body))
-            # print(type(expected_body))
             assert  expected_body in body
             return  True
         except:
             self.my_log.error("不包含或者body错误; 接口请求所返回的bodybody is {0}, 需要对比的bodyexpected_body is {1}".format(body,expected_body))
             raise
 
+    def assert_int_body_dict(self,expected_body,body):
+        """
+        #只接收字典类型数据
+        # 验证返回结果 body是否包含expected_body
+        # :param body:            接口请求所返回的body
+        # :param expected_body:  表格取的需要对比的body
+        # :return:
+        """
+        try:
+            count=0
+            for body_key in body.keys():
+                for expected_body_key in expected_body.keys():
+                    if body_key==expected_body_key :
+                        if body[body_key]==expected_body[expected_body_key] or expected_body[expected_body_key]=="":
+                            count+=1
+            assert  len(expected_body)==count
+            return  True
+        except:
+            self.my_log.error("不包含或者body错误; 接口请求所返回的bodybody is {0}, 需要对比的bodyexpected_body is {1}".format(body,expected_body))
+            raise
+
+
 if __name__ == '__main__':
 
-    a="non_field_errors': ['无效数据。期待为字典类型，得到的是 str 。']"
-    b={'non_field_errors': ['无效数据。期待为字典类型，得到的是 str 。']}
-    AssertUitl().assert_int_body(a,b)
+    expected_body= {}
+    body=  {'order_id': '20200824063500000000001'}
+
+    AssertUitl().assert_int_body_dict(expected_body,body)
+
+
+

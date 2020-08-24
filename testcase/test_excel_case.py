@@ -148,7 +148,7 @@ class TestExcel:
                "<font color='red'>期望结果: </font>{}<Br/>" \
                "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                                                           url,method,code,pprint.pformat(res["code"]),
-                                                          pprint.pformat(expect_result),
+                                                          pprint.pformat(eval(expect_result)),
                                                           pprint.pformat(res["body"]))
         allure.dynamic.description(desc)
 
@@ -160,7 +160,7 @@ class TestExcel:
         AssertUitl().assert_code(int(res["code"]),int(code))
 
         #返回结果内容
-        # AssertUitl().assert_int_body((res["body"]),dict(expect_result))
+        AssertUitl().assert_int_body_dict(eval(expect_result),res ["body"])
 
         #数据库结果断言
         #Base.assert_db("db_1",res["body"],db_verify)
