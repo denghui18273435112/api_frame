@@ -148,7 +148,7 @@ class TestExcel:
                "<font color='red'>期望结果: </font>{}<Br/>" \
                "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
                                                           url,method,code,pprint.pformat(res["code"]),
-                                                          pprint.pformat(dict(expect_result)),
+                                                          pprint.pformat(expect_result),
                                                           pprint.pformat(res["body"]))
         allure.dynamic.description(desc)
 
