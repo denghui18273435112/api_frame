@@ -130,19 +130,31 @@ def send_mail(report_html_path="",content="测试",title="测试"):
         file=report_html_path)          #附件
     email.send_mail()
 
-def assert_db(db_name,result,db_verify):
+def assert_db(result,db_verify):
     """
+    数据库结果断言验证
     数据库比较
     :param db_name:  数据库名称
     :param result:  返回的结果 body
     :param db_verify: sql语句
     :return:
     """
+    # print("result输入的内容:"+result)
+    # print("db_verify输入的内容:"+db_verify)
     assert_util =  AssertUitl()
-    #sql = init_db("db_1")
-    sql = init_db(db_name)
-    # 2、查询sql，excel定义好的
-    db_res = sql.fetchone(db_verify)
+    sql = Mysql("211.103.136.242",
+                  "test",
+                  "test123456",
+                  "meiduo",
+                  7090,
+                  charset="utf8")
+    db_res = sql.fetchone(str(db_verify))
+
+    #print("db_verify信息:"+db_verify)
+    # for i in db_res:
+    #     print(db_res[i])
+    #
+    # print(type(db_res))
 
     #log.debug("数据库查询结果：{}".format(str(db_res)))
     # 3、数据库的结果与接口返回的结果验证
@@ -156,8 +168,9 @@ def assert_db(db_name,result,db_verify):
         # 验证
         assert_util.assert_body(res_line, res_db_line)
 
-def report_path():
 
+
+def report_path():
     #return  Conf.get_report_path()+os.sep+"{}-result".format(str(datetime.now().strftime("%Y%m%d%H%M")))
     return  Conf.get_report_path()+os.sep+"result"
 

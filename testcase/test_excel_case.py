@@ -60,7 +60,6 @@ class TestExcel:
             res = request.post(url, json=params, headers=header, cookies=cookie)
         else:
             my_log().error("错误请求method: %s" % method)
-
         return res
 
     def run_pre(self,pre_case):
@@ -85,17 +84,16 @@ class TestExcel:
         #     cookie = cookies
         cookie = Base.json_parse(cookies)
         res = self.run_api(url,method,params,header)
-        print("前置用例执行：%s"%res)
+        #print("前置用例执行：%s"%res)
         return res
 
 #1）.初始化信息，url,data
+
 
     # 1、增加Pyest
     @pytest.mark.parametrize("case",run_list)
     # 2、修改方法参数
     def test_run(self,case):
-
-
 
         # 3、重构函数内容
         #data_key = ExcelConfig.DataConfig
@@ -117,54 +115,39 @@ class TestExcel:
 
 
 
-        # 1、验证前置条件
+        # 先检查一行中是否有前置条件，如果有先执行
         if pre_exec:
-            pass
-        # 2、找到执行用例
-            # 前置测试用例
             pre_case = data_init.get_case_pre(pre_exec)
-            print("前置条件信息为：%s"%pre_case)
+            print("\n 当前执行的用例编号:{};当前用例的前置条件,执行的用例编号:{}".format(case_id,pre_exec))
             pre_res = self.run_pre(pre_case)
             headers,cookies = self.get_correlation(headers,cookies,pre_res)
+        res = self.run_api(url, method, params, Base.json_parse(headers),Base.json_parse(cookies))
+        print("当前前置条件所执行的返回结果:{}".format(res))
 
-        header = Base.json_parse(headers)
-        cookie = Base.json_parse(cookies)
-        res = self.run_api(url, method, params, header,cookie)
-        print("测试用例执行：%s" % res)
 
-        #allure
-        #sheet名称  feature 一级标签
+
+        #allure报告
         allure.dynamic.feature(sheet_name)
-        #模块   story 二级标签
         allure.dynamic.story(case_model)
-        #用例ID+接口名称  title
         allure.dynamic.title(case_id+case_name)
-        #请求URL  请求类型 期望结果 实际结果描述
         desc = "<font color='red'>当前执行时间: </font> {}<Br/>" \
                 "<font color='red'>请求URL: </font> {}<Br/>" \
                "<font color='red'>请求类型: </font>{}<Br/>" \
                 "<font color='red'>期望状态码: </font>{}<Br/>" \
                 "<font color='red'>实际状态码: </font>{}<Br/>" \
                "<font color='red'>期望结果: </font>{}<Br/>" \
-               "<font color='red'>实际结果: </font>{}".format(str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
-                                                          url,method,code,pprint.pformat(res["code"]),
-                                                          pprint.pformat(eval(expect_result)),
-                                                          pprint.pformat(res["body"]))
+               "<font color='red'>实际结果: </font>{}".format(
+                                    str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
+                                    url,method,code,pprint.pformat(res["code"]),
+                                    pprint.pformat(eval(expect_result)),
+                                    pprint.pformat(res["body"]))
         allure.dynamic.description(desc)
 
 
-
-        #断言验证
-        #状态码，返回结果内容，数据库相关的结果的验证
-        #状态码
-        #assert_util = AssertUitl()
+        #断言 code、字段对比、数据对比
         AssertUitl().assert_code(int(res["code"]),int(code))
-
-        #返回结果内容
         AssertUitl().assert_int_body_dict(eval(expect_result),res ["body"])
-
-        #数据库结果断言
-        #Base.assert_db("db_1",res["body"],db_verify)
+        Base.assert_db(res["body"],db_verify)
 
 
     def get_correlation(self,headers,cookies,pre_res):

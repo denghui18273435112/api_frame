@@ -8,6 +8,7 @@ class AssertUitl:
 
     def assert_code(self,code,expected_code):
         """
+        code 断言
         #预期和实际是否一致;#抛出异常；如果相等返回ture;如果不相等抛出异常
          有关于python里raise显示引发异常的方法:
         当程序出错时,python会自动触发异常,也可以通过raise显示引发异常
@@ -54,6 +55,7 @@ class AssertUitl:
 
     def assert_int_body_dict(self,expected_body,body):
         """
+        结果断言验证
         #只接收字典类型数据
         # 验证返回结果 body是否包含expected_body
         # :param body:            接口请求所返回的body
