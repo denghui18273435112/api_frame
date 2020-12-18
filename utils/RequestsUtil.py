@@ -52,6 +52,17 @@ class Request:
 		return self.request_api(url,method="post",**kwargs)
 
 if __name__ == '__main__':
-	url = ConfigYaml().get_conf_url()+"/authorizations/"
-	data = {"username":"python","password":"12345678"}
-	print(Request().post(url=url,data=data))
+	# url = ConfigYaml().get_conf_url()+"/authorizations/"
+	# data = {"username":"python","password":"12345678"}
+	# print(Request().post(url=url,data=data))
+	url ="http://192.168.1.66:8088/zentao/api-getsessionid.json"
+	headers ={"Host":"<calculated when request is sent>",
+			  "User-Agent":"PostmanRuntime/7.26.8",
+			  "Accept":"*/*",
+			  "Accept-Encoding":"gzip, deflate, br",
+			  "Connection":"keep-alive",
+			  "Cookie":"lang=zh-cn; device=desktop; theme=default; lastProject=1; lastProduct=1; lastTaskModule=0; preProductID=1; preBranch=0; bugModule=0; bugBranch=0; treeBranch=0; qaBugOrder=id_desc; zentaosid=7o6sngqg9mp01dmhmg38m3d6i1",
+			  "Postman-Token":"<calculated when request is sent>"}
+	print(requests.get(url=url,headers=headers))
+
+
