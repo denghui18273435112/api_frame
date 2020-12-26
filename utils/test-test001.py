@@ -1,6 +1,6 @@
 # coding=utf-8
 import requests
-5loginhost="192.168.1.66:8088/index.php?m=user&f=login" #登录url
+oginhost="192.168.1.66:8088/index.php?m=user&f=login" #登录url
 add_bughost="92.168.1.66:8088/index.php?m=bug&f=create&productID=10&branch=0&extra=moduleID=0" #new bug url
 
 def add_bug():
